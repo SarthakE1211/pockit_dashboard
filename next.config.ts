@@ -3,7 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // Compression
   compress: true,
-
+    allowedDevOrigins: [
+    "https://unelementary-foliar-ivey.ngrok-free.dev"
+  ],
   // Production optimizations
   productionBrowserSourceMaps: false,
 

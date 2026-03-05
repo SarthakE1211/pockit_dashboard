@@ -1,3 +1,4 @@
+
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
@@ -16,6 +17,8 @@ export async function POST(request: NextRequest) {
 
     // Call backend API
     const backendUrl = process.env.BACKEND_API_URL;
+    console.log("backendUrl",backendUrl);
+    
     if (!backendUrl) {
       console.error('BACKEND_API_URL not configured');
       return NextResponse.json(
@@ -23,18 +26,26 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
+   const params = new URLSearchParams({
+  API: "Login",
+  LoginName: username,   // exact case
+  Password: password,
+  IPAddress: "127.0.0.1",
+  Source: "Web",
+});
+    
 
-    const response = await fetch(`${backendUrl}/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
+  console.log("params",params);
+  
+    const response = await fetch(`${backendUrl}?${params.toString()}`, {
+     
     });
 
     const data = await response.json();
+    console.log("data",data);
+    
 
-    if (data.success && data.token) {
+    if (data.RefreshToken && data.EncryptedToken) {
       // Create response with secure httpOnly cookie
       const res = NextResponse.json(
         { success: true, message: 'Login successful' },
@@ -42,7 +53,7 @@ export async function POST(request: NextRequest) {
       );
 
       // Set httpOnly cookie for token
-      res.cookies.set('token', data.token, {
+      res.cookies.set('token', data.EncryptedToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'strict',

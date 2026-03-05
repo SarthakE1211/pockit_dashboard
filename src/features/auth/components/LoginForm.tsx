@@ -3,40 +3,43 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import {  useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import UserLogin from "../api/login";
 
 
 export default function LoginPage() {
-    const router = useRouter();
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  console.log("handleSubmit called",username,password);
-   const backendUrl = process.env.BACKEND_API_URL;
-console.log("BACKEND_API_URL:", backendUrl);
-  try {
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    });
+    e.preventDefault();
+    console.log("handleSubmit called", username, password);
+    const backendUrl = process.env.BACKEND_API_URL;
+    console.log("BACKEND_API_URL:", backendUrl);
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
+      console.log("data2", data);
 
-    if (data.success) {
-      router.push("/dashboard");
-    } else {
-      alert(data.message);
+
+      if (data.success === true) {
+        router.replace("/dashboard");
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
     }
-  } catch (error) {
-    console.error("Login error:", error);
-  }
-};
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#a8c8d8] to-[#c9dbe6] p-4">
 
@@ -89,7 +92,7 @@ console.log("BACKEND_API_URL:", backendUrl);
                 placeholder="Enter your username"
                 className="w-full px-3 py-2.5 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
                 value={username}
-                onChange={(e)=>{setUsername(e.target.value)}}
+                onChange={(e) => { setUsername(e.target.value) }}
               />
             </div>
 
@@ -98,14 +101,26 @@ console.log("BACKEND_API_URL:", backendUrl);
               <label className="block text-sm text-gray-600 mb-1">
                 Password
               </label>
-              <input
-                type="password"
-                required
-                placeholder="Enter password"
-                className="w-full px-3 py-2.5 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
-                value={password}
-                onChange={(e)=>setPassword(e.target.value)}
-              />
+
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  required
+                  placeholder="Enter password"
+                  className="w-full px-3 py-2.5 pr-10 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+
+                {/* Eye Button */}
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+                >
+                  {showPassword ? "🙈" : "👁"}
+                </button>
+              </div>
             </div>
 
             {/* Forgot Password */}
