@@ -6,15 +6,22 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import UserLogin from "../api/login";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/src/store/slices/userSlice";
+import { Spin } from "antd";
 
 
 export default function LoginPage() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch()
+  const [Loading, setLoading] = useState(false);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true)
     console.log("handleSubmit called", username, password);
     const backendUrl = process.env.BACKEND_API_URL;
     console.log("BACKEND_API_URL:", backendUrl);
@@ -31,13 +38,16 @@ export default function LoginPage() {
       console.log("data2", data);
 
 
-      if (data.success === true) {
+      if (data.success) {
+        dispatch(setUser(data.user))
         router.replace("/dashboard");
       } else {
-        alert(data.message);
+        setErrorMessage(data.message);
       }
     } catch (error) {
       console.error("Login error:", error);
+    } finally {
+      setLoading(false)
     }
   };
   return (
@@ -122,6 +132,9 @@ export default function LoginPage() {
                 </button>
               </div>
             </div>
+            {errorMessage && (
+              <p className="text-red-500 text-sm mt-2 text-center">{errorMessage}</p>
+            )}
 
             {/* Forgot Password */}
             <div className="text-right">
@@ -138,7 +151,8 @@ export default function LoginPage() {
               type="submit"
               className="w-full cursor-pointer py-2.5 rounded-md text-white text-sm font-medium bg-gradient-to-r from-indigo-500 to-purple-600 hover:opacity-95 transition"
             >
-              Login
+              {Loading ? <Spin size="default" style={{ color: "white" }} /> : "Login"}
+              {/* {Loading ? "Logging in..." : "Login"} */}
             </button>
 
           </form>

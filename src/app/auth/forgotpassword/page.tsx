@@ -1,15 +1,45 @@
 "use client";
 
+import { Modal, Spin } from "antd";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function ForgotPasswordPage() {
-    const [username,setUsername]=useState("")
+  const [username, setUsername] = useState("")
+  const [Loading, setLoading] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [responseMessage, setResponseMessage] = useState("");
+  const router = useRouter();
+  const handleForgotpassword = async (e: any) => {
+    e.preventDefault();
+    setLoading(true)
+    console.log("handleSubmit called", username);
+    try {
+      const res = await fetch("/api/auth/forgot-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username }),
+      });
 
-    const handleForgotpassword=()=>{
+      const data = await res.json();
+      console.log("data2", data);
 
+      if (data.Status === "Success") {
+        setResponseMessage(data.Message);
+        setModalOpen(true);
+        router.replace("/auth/login");
+      }
+
+    } catch (error) {
+      console.error("Login error:", error);
+    } finally {
+      setLoading(false)
     }
+  }
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#a8c8d8] to-[#c9dbe6] p-4">
 
@@ -50,7 +80,7 @@ export default function ForgotPasswordPage() {
               placeholder="Enter your username"
               className="w-full px-3 py-2.5 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
               value={username}
-              onChange={(e)=>setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
 
@@ -59,7 +89,7 @@ export default function ForgotPasswordPage() {
             type="submit"
             className="w-full cursor-pointer py-2.5 rounded-md text-white text-sm font-medium bg-gradient-to-r from-indigo-500 to-purple-600 hover:opacity-95 transition"
           >
-            Forgot password
+            {Loading ? <Spin size="default" style={{ color: "white" }} /> : " Forgot password"}
           </button>
         </form>
 
@@ -74,6 +104,15 @@ export default function ForgotPasswordPage() {
         </div>
 
       </div>
+      <Modal
+        title="Forgot Password"
+        open={modalOpen}
+        onOk={() => setModalOpen(false)}
+        onCancel={() => setModalOpen(false)}
+        centered
+      >
+        <p>{responseMessage}</p>
+      </Modal>
     </div>
   );
 }

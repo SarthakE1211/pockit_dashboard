@@ -2,17 +2,15 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
-    const { email } = await request.json();
+    const { username } = await request.json();
 
     // Validate input
-    if (!email) {
+    if (!username) {
       return NextResponse.json(
         { success: false, message: 'Email is required' },
         { status: 400 }
       );
     }
-
-    // Call backend API
     const backendUrl = process.env.BACKEND_API_URL;
     if (!backendUrl) {
       console.error('BACKEND_API_URL not configured');
@@ -22,13 +20,24 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const response = await fetch(`${backendUrl}/forgot-password`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email }),
+    const params = new URLSearchParams({
+      API: "ForgotPassword",
+      LoginName: username,   // exact case
+
+      IPAddress: "127.0.0.1",
+      Source: "Web",
     });
+
+
+    console.log("params", params);
+
+    const response = await fetch(`${backendUrl}?${params.toString()}`, {
+
+    });
+    console.log("response forgot password", response);
+
+    // Call backend API
+
 
     const data = await response.json();
 

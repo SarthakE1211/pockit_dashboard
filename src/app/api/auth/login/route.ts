@@ -3,10 +3,10 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
-     console.log("POST called");
+    console.log("POST called");
     const { username, password } = await request.json();
-   
-    
+
+
     // Validate input
     if (!username || !password) {
       return NextResponse.json(
@@ -17,8 +17,8 @@ export async function POST(request: NextRequest) {
 
     // Call backend API
     const backendUrl = process.env.BACKEND_API_URL;
-    console.log("backendUrl",backendUrl);
-    
+    console.log("backendUrl", backendUrl);
+
     if (!backendUrl) {
       console.error('BACKEND_API_URL not configured');
       return NextResponse.json(
@@ -26,29 +26,29 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
-   const params = new URLSearchParams({
-  API: "Login",
-  LoginName: username,   // exact case
-  Password: password,
-  IPAddress: "127.0.0.1",
-  Source: "Web",
-});
-    
+    const params = new URLSearchParams({
+      API: "Login",
+      LoginName: username,   // exact case
+      Password: password,
+      IPAddress: "127.0.0.1",
+      Source: "Web",
+    });
 
-  console.log("params",params);
-  
+
+    console.log("params", params);
+
     const response = await fetch(`${backendUrl}?${params.toString()}`, {
-     
+
     });
 
     const data = await response.json();
-    console.log("data",data);
-    
+    console.log("data", data);
+
 
     if (data.RefreshToken && data.EncryptedToken) {
       // Create response with secure httpOnly cookie
       const res = NextResponse.json(
-        { success: true, message: 'Login successful' },
+        { success: true, user: data },
         { status: 200 }
       );
 
@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
       return res;
     } else {
       return NextResponse.json(
-        { success: false, message: data.message || 'Login failed' },
+        { success: false, message: data.Message },
         { status: 401 }
       );
     }
