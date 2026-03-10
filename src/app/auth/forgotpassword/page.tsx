@@ -15,7 +15,7 @@ export default function ForgotPasswordPage() {
   const handleForgotpassword = async (e: any) => {
     e.preventDefault();
     setLoading(true)
-    console.log("handleSubmit called", username);
+    console.log("handleForgotpassword called", username);
     try {
       const res = await fetch("/api/auth/forgot-password", {
         method: "POST",
@@ -31,11 +31,10 @@ export default function ForgotPasswordPage() {
       if (data.Status === "Success") {
         setResponseMessage(data.Message);
         setModalOpen(true);
-        router.replace("/auth/login");
       }
-
+      // router.replace("/auth/login");
     } catch (error) {
-      console.error("Login error:", error);
+      console.error("Forgot password error:", error);
     } finally {
       setLoading(false)
     }
@@ -107,8 +106,14 @@ export default function ForgotPasswordPage() {
       <Modal
         title="Forgot Password"
         open={modalOpen}
-        onOk={() => setModalOpen(false)}
-        onCancel={() => setModalOpen(false)}
+        onOk={() => {
+          setModalOpen(false);
+          router.replace("/auth/login");
+        }}
+        onCancel={() => {
+          setModalOpen(false);
+          router.replace("/auth/login");
+        }}
         centered
       >
         <p>{responseMessage}</p>

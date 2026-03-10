@@ -53,7 +53,16 @@ export async function POST(request: NextRequest) {
       );
 
       // Set httpOnly cookie for token
-      res.cookies.set('token', data.EncryptedToken, {
+
+      res.cookies.set("accessToken", data.EncryptedToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: 60 * 15, // 15 minutes
+        path: "/",
+      });
+
+      res.cookies.set('refreshToken', data.RefreshToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'strict',

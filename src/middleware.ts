@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
-  const token = request.cookies.get("token")?.value;
+  const token = request.cookies.get("refreshToken")?.value;
   const { pathname } = request.nextUrl;
 
   // Log authentication attempts (development only)
@@ -37,13 +37,13 @@ export function middleware(request: NextRequest) {
   const response = NextResponse.next();
 
   // Content Security Policy
- response.headers.set(
-  "Content-Security-Policy",
-  "default-src 'self'; " +
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval'; " +
-  "style-src 'self' 'unsafe-inline'; " +
-  "connect-src 'self' https://pockit.pockitengineers.com/API/jsonAuth.ashx/;"
-);
+  response.headers.set(
+    "Content-Security-Policy",
+    "default-src 'self'; " +
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval'; " +
+    "style-src 'self' 'unsafe-inline'; " +
+    "connect-src 'self' https://pockit.pockitengineers.com/API/jsonAuth.ashx/;"
+  );
 
   // CORS headers (adjust origin as needed)
   response.headers.set("Access-Control-Allow-Origin", request.headers.get("origin") || "*");
