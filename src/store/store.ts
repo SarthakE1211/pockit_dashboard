@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./slices/userSlice";
+import { UserState } from "./slices/userSlice";
 
 import {
     persistStore,
@@ -19,6 +20,10 @@ import { combineReducers } from "redux";
 const rootReducer = combineReducers({
     user: userReducer,
 });
+
+export interface RootState {
+    user: UserState;
+}
 
 const persistConfig = {
     key: "root",
@@ -40,5 +45,4 @@ export const store = configureStore({
 
 export const persistor = persistStore(store);
 
-export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

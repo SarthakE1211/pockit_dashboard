@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 
-type UserState = {
+export type UserState = {
     Status: string;
     Message: string;
     UserID: string;
@@ -19,7 +19,7 @@ type UserState = {
     TokenExpiry: string;
 
 } | null;
-const initialState: UserState = null;
+const initialState = null as UserState;
 
 
 
@@ -27,12 +27,12 @@ const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        setUser: (state, action: PayloadAction<any>) => {
+        setUser: (state, action: PayloadAction<UserState>) => {
             console.log("setUser", action);
 
             return action.payload
         },
-        clearUser: () => {
+        clearUser: (state) => {
             return null
         }
 

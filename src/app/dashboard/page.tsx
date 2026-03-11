@@ -5,7 +5,7 @@ import { RootState } from "@/src/store/store";
 import { useSelector } from "react-redux";
 const DashBoard = () => {
     const user = useAppSelector((state) => state.user);
-    console.log("user", user, user?.UserID);
+    // console.log("user", user, user?.UserID);
 
     return (
         <div>

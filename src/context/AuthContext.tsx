@@ -16,7 +16,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const router = useRouter();
     const dispatch = useDispatch();
-    const userId = useAppSelector((state) => state.user?.UserID);
+    const userId: string | null = useAppSelector((state) => state.user?.UserID ?? null);
 
     const logout = async () => {
         // remove token cookie

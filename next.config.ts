@@ -2,8 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   // Compression
+  output: "standalone",
   compress: true,
-    allowedDevOrigins: [
+  allowedDevOrigins: [
     "https://unelementary-foliar-ivey.ngrok-free.dev"
   ],
   // Production optimizations
