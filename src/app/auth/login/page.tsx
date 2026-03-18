@@ -10,19 +10,19 @@ const LoginPage = () => {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
+
     const seen = localStorage.getItem("seenSplash");
 
-    if (seen) {
+    // if (seen) {
+    //   setShowSplash(false);
+    // } else {
+    const timer = setTimeout(() => {
+      // localStorage.setItem("seenSplash", "true");
       setShowSplash(false);
-    } else {
-      // First time, show splash for 6 seconds then hide
-      const timer = setTimeout(() => {
-        localStorage.setItem("seenSplash", "true");
-        setShowSplash(false);
-      }, 6000);
+    }, 7000);
 
-      return () => clearTimeout(timer);
-    }
+    return () => clearTimeout(timer);
+    // }
   }, []);
 
   // Only render after client-side mount to prevent hydration mismatch
