@@ -27,10 +27,10 @@ export default function Header() {
                 {/* SEARCH */}
                 <div className="flex items-center bg-white rounded-lg overflow-hidden w-[480px] shadow">
 
-                    <select className="px-3 py-2 text-sm border-r outline-none text-gray-700">
+                    {/* <select className="px-3 py-2 text-sm border-r outline-none text-gray-700">
                         <option>Products</option>
                         <option>Services</option>
-                    </select>
+                    </select> */}
 
                     <input
                         type="text"

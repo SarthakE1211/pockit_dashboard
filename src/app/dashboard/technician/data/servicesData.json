@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "title": "Services Closed (This Month)",
+        "value": 24,
+        "color": "text-green-600",
+        "bgColor": "bg-green-100",
+        "icon": "closed"
+    },
+    {
+        "id": 2,
+        "title": "Pending Service Orders",
+        "value": 8,
+        "color": "text-red-500",
+        "bgColor": "bg-red-100",
+        "icon": "pending"
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "service": "Service #1023 - AC Repair",
+        "time": "8:00 AM - 7:31 PM",
+        "status": "completed"
+    },
+    {
+        "id": 2,
+        "service": "Service #1024 - Installation",
+        "time": "8:00 PM - 6:01 PM",
+        "status": "in-progress"
+    },
+    {
+        "id": 3,
+        "service": "Service #1025 - Maintenance",
+        "time": "8:00 AM - 7:00 PM",
+        "status": "pending"
+    }
+]

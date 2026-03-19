@@ -42,7 +42,12 @@ export function middleware(request: NextRequest) {
     "default-src 'self'; " +
     "script-src 'self' 'unsafe-inline' 'unsafe-eval'; " +
     "style-src 'self' 'unsafe-inline'; " +
-    "connect-src 'self' https://pockit.pockitengineers.com/API/jsonAuth.ashx/;"
+    "connect-src 'self' https://pockit.pockitengineers.com https://api-bdc.io https://nominatim.openstreetmap.org https://*.tile.openstreetmap.org; " +
+    "img-src 'self' data: https://*.tile.openstreetmap.org https://unpkg.com;"
+  );
+  response.headers.set(
+    "Permissions-Policy",
+    "geolocation=(self)"
   );
 
   // CORS headers (adjust origin as needed)
