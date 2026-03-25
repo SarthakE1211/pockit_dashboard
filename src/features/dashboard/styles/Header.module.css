@@ -1,0 +1,283 @@
+/* Header.module.css */
+
+/* ── Root ── */
+.root {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* ── Main bar ── */
+.bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 0 24px;
+    height: 64px;
+
+    /* Light LEFT → Dark RIGHT */
+    background: linear-gradient(to right, #e8f0ff 0%, #a8c4f8 20%, #4a7de8 45%, #1a3faa 70%, #0b1f5c 100%);
+    box-shadow: 0 2px 20px rgba(11, 31, 92, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shine overlay */
+.bar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+/* ── Left ── */
+.left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+}
+
+.menuBtn {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    background: rgba(26, 63, 170, 0.1);
+    border: 1.5px solid rgba(26, 63, 170, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #1a3faa;
+    transition: background 0.2s, color 0.2s;
+}
+
+.menuBtn:hover {
+    background: rgba(26, 63, 170, 0.18);
+}
+
+.logoWrap {
+    display: flex;
+    align-items: center;
+}
+
+/* ── Search ── */
+.searchWrap {
+    flex: 1;
+    max-width: 520px;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.searchWrap:focus-within {
+    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+.searchIcon {
+    padding: 0 12px;
+    color: rgba(255, 255, 255, 0.75);
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    transition: color 0.2s;
+}
+
+.searchWrap:focus-within .searchIcon {
+    color: #1a3faa;
+}
+
+.searchInput {
+    flex: 1;
+    padding: 10px 8px 10px 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    font-family: inherit;
+    color: #fff;
+    min-width: 0;
+}
+
+.searchInput::placeholder {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.searchWrap:focus-within .searchInput {
+    color: #111827;
+}
+
+.searchWrap:focus-within .searchInput::placeholder {
+    color: #9ca3af;
+}
+
+.searchBtn {
+    padding: 0 16px;
+    height: 100%;
+    min-height: 42px;
+    background: rgba(11, 31, 92, 0.55);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s;
+}
+
+.searchBtn:hover {
+    background: rgba(11, 31, 92, 0.8);
+}
+
+.searchWrap:focus-within .searchBtn {
+    background: #1a3faa;
+}
+
+/* ── Right ── */
+.right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.iconBtn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1.5px solid rgba(255, 255, 255, 0.22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    position: relative;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.iconBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.iconBtnPrimary {
+    background: rgba(11, 31, 92, 0.5);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.iconBtnPrimary:hover {
+    background: rgba(11, 31, 92, 0.75);
+}
+
+.notifBadge {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #ef4444;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+/* ── Mobile search bar ── */
+.mobileSearch {
+    display: none;
+    padding: 10px 16px 12px;
+    background: #1a3faa;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobileSearchInner {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1.5px solid rgba(255, 255, 255, 0.28);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.mobileSearchInner input {
+    flex: 1;
+    padding: 10px 12px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #fff;
+    font-family: inherit;
+}
+
+.mobileSearchInner input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.mobileSearchInner button {
+    padding: 0 14px;
+    height: 42px;
+    background: rgba(11, 31, 92, 0.5);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.mobileSearchInner button:hover {
+    background: rgba(11, 31, 92, 0.8);
+}
+
+/* ── Responsive ── */
+
+/* Tablet & below: hide inline search, show mobile bar */
+@media (max-width: 860px) {
+    .searchWrap {
+        display: none;
+    }
+
+    .mobileSearch {
+        display: block;
+    }
+
+    .bar {
+        padding: 0 16px;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+    .bar {
+        height: 56px;
+        gap: 10px;
+    }
+
+    .right {
+        gap: 6px;
+    }
+
+    .iconBtn {
+        width: 34px;
+        height: 34px;
+    }
+}
+
+/* Tiny — hide plus button */
+@media (max-width: 360px) {
+    .plusBtn {
+        display: none;
+    }
+}

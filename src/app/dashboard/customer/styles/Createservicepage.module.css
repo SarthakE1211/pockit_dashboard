@@ -1,0 +1,472 @@
+/* CreateServicePage.module.css */
+
+.root {
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    width: 100%;
+    background: #f8fafc;
+}
+
+.page {
+    width: 100%;
+    padding: 28px 32px 64px;
+}
+
+/* ── Page header ── */
+.pageHeader {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.backBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6b7280;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 7px 14px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+}
+
+.backBtn:hover {
+    background: #f9fafb;
+}
+
+.headerText {}
+
+.pageSubtitle {
+    font-size: 12px;
+    color: #9ca3af;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.pageTitle {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.02em;
+}
+
+/* ── Layout ── */
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 20px;
+    align-items: start;
+}
+
+/* ── Form card ── */
+.formCard {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    padding: 24px 26px;
+}
+
+.sectionTitle {
+    font-size: 13px;
+    font-weight: 700;
+    color: #374151;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.formGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.formGridFull {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.required {
+    color: #ef4444;
+    margin-left: 2px;
+}
+
+.input {
+    padding: 9px 12px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    font-size: 13px;
+    color: #111827;
+    font-family: inherit;
+    outline: none;
+    background: #fff;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+}
+
+.input::placeholder {
+    color: #9ca3af;
+}
+
+.select {
+    padding: 9px 12px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    font-size: 13px;
+    color: #111827;
+    font-family: inherit;
+    outline: none;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.15s;
+}
+
+.select:focus {
+    border-color: #2563eb;
+}
+
+.textarea {
+    padding: 9px 12px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    font-size: 13px;
+    color: #111827;
+    font-family: inherit;
+    outline: none;
+    background: #fff;
+    resize: vertical;
+    min-height: 90px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+}
+
+.textarea::placeholder {
+    color: #9ca3af;
+}
+
+.fieldHint {
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+/* ── Section divider ── */
+.divider {
+    height: 1px;
+    background: #f3f4f6;
+    margin: 20px 0;
+}
+
+/* ── Form actions ── */
+.formActions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 6px;
+}
+
+.submitBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 22px;
+    border-radius: 9px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+}
+
+.submitBtn:hover {
+    background: #1d4ed8;
+}
+
+.cancelBtn {
+    padding: 10px 18px;
+    border-radius: 9px;
+    background: #fff;
+    color: #374151;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid #e5e7eb;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+}
+
+.cancelBtn:hover {
+    background: #f9fafb;
+}
+
+.draftBtn {
+    padding: 10px 18px;
+    border-radius: 9px;
+    background: #fff;
+    color: #6b7280;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid #e5e7eb;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+    margin-left: auto;
+}
+
+.draftBtn:hover {
+    background: #f9fafb;
+}
+
+/* ── Side panel ── */
+.sidePanel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.sideCard {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    padding: 18px 20px;
+}
+
+.sideCardTitle {
+    font-size: 13px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 14px;
+}
+
+/* Priority selector */
+.priorityGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+}
+
+.priorityBtn {
+    padding: 8px 6px;
+    border-radius: 8px;
+    border: 1.5px solid #e5e7eb;
+    background: #f9fafb;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b7280;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: center;
+    transition: all 0.15s;
+}
+
+.priorityBtnActive {
+    border-color: #2563eb;
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+/* Checklist */
+.checkItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 13px;
+    color: #374151;
+}
+
+.checkItem:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.checkBox {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1.5px solid #d1d5db;
+    background: #fff;
+    flex-shrink: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkBoxChecked {
+    background: #2563eb;
+    border-color: #2563eb;
+}
+
+/* Tips */
+.tipItem {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.tipItem:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.tipDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #2563eb;
+    margin-top: 5px;
+    flex-shrink: 0;
+}
+
+.tipText {
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+/* ── Success state ── */
+.successWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 64px 24px;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.successIcon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #dcfce7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+}
+
+.successTitle {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.successDesc {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.6;
+    max-width: 360px;
+    margin-bottom: 6px;
+}
+
+.successId {
+    font-size: 12px;
+    color: #9ca3af;
+    margin-bottom: 24px;
+}
+
+.successActions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* ── Animations ── */
+@keyframes up {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.f {
+    animation: up 0.4s ease forwards;
+    opacity: 0;
+}
+
+.f1 {
+    animation-delay: 0.04s;
+}
+
+.f2 {
+    animation-delay: 0.10s;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .page {
+        padding: 24px 20px 56px;
+    }
+
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidePanel {
+        order: -1;
+    }
+}
+
+@media (max-width: 600px) {
+    .page {
+        padding: 20px 16px 48px;
+    }
+
+    .formGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .formActions {
+        flex-wrap: wrap;
+    }
+
+    .draftBtn {
+        margin-left: 0;
+    }
+}

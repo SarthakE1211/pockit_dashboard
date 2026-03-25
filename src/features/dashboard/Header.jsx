@@ -1,80 +1,112 @@
 "use client";
 
 import Image from "next/image";
-import { Menu, Plus, Bell, User } from "lucide-react";
+import { Menu, Plus, Bell, User, Search, X } from "lucide-react";
 import { useState } from "react";
 import ProfileDrawer from "./ProfileDrawer";
+import styles from "./styles/Header.module.css";
 
 export default function Header() {
     const [openDrawer, setOpenDrawer] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     return (
-        <header className="w-full ">
-            <div className="flex items-center justify-between  px-6  bg-gradient-to-r from-[#5fa8ff] to-[#2c3ea8] shadow-lg">
+        <>
+            {/* Google Font */}
+            {/* <style>{`@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');`}</style> */}
 
-                {/* LEFT */}
-                <div className="flex items-center gap-4">
-                    <Menu className="text-white cursor-pointer" />
+            <header className={styles.root}>
 
-                    <Image
-                        src="/logo.png"
-                        alt="Pockit Engineers"
-                        width={150}
-                        height={40}
-                    />
-                </div>
+                {/* ── Main bar ── */}
+                <div className={styles.bar}>
 
-                {/* SEARCH */}
-                <div className="flex items-center bg-white rounded-lg overflow-hidden w-[480px] shadow">
-
-                    {/* <select className="px-3 py-2 text-sm border-r outline-none text-gray-700">
-                        <option>Products</option>
-                        <option>Services</option>
-                    </select> */}
-
-                    <input
-                        type="text"
-                        placeholder="Search products or services..."
-                        className="flex-1 px-3 py-2 text-sm outline-none"
-                    />
-
-                    <button className="bg-[#0b2a8f] px-4 py-3 flex items-center justify-center">
-                        <svg
-                            viewBox="64 64 896 896"
-                            fill="white"
-                            className="w-4 h-4"
+                    {/* LEFT — menu + logo */}
+                    <div className={styles.left}>
+                        <button
+                            className={styles.menuBtn}
+                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                            aria-label="Toggle menu"
                         >
-                            <path d="M909.6 826.5L703.5 620.4a326.7 326.7 0 10-83.1 83.1l206.1 206.1a60 60 0 0084.9-84.9zM416 704a288 288 0 11288-288 288.3 288.3 0 01-288 288z"></path>
-                        </svg>
-                    </button>
+                            {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+                        </button>
+
+                        <div className={styles.logoWrap}>
+                            <Image
+                                src="/logo.png"
+                                alt="Pockit Engineers"
+                                width={130}
+                                height={36}
+                                style={{ objectFit: "contain" }}
+                                priority
+                            />
+                        </div>
+                    </div>
+
+                    {/* SEARCH — desktop only */}
+                    <div className={styles.searchWrap}>
+                        <span className={styles.searchIcon}>
+                            <Search size={16} />
+                        </span>
+                        <input
+                            type="text"
+                            placeholder="Search products or services..."
+                            className={styles.searchInput}
+                        />
+                        <button className={styles.searchBtn} aria-label="Search">
+                            <svg viewBox="64 64 896 896" fill="white" width="15" height="15">
+                                <path d="M909.6 826.5L703.5 620.4a326.7 326.7 0 10-83.1 83.1l206.1 206.1a60 60 0 0084.9-84.9zM416 704a288 288 0 11288-288 288.3 288.3 0 01-288 288z" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    {/* RIGHT — action buttons */}
+                    <div className={styles.right}>
+
+                        <button
+                            className={`${styles.iconBtn} ${styles.iconBtnPrimary} ${styles.plusBtn}`}
+                            aria-label="Create new"
+                        >
+                            <Plus size={17} />
+                        </button>
+
+                        <button className={styles.iconBtn} aria-label="Notifications">
+                            <Bell size={17} />
+                            <span className={styles.notifBadge} />
+                        </button>
+
+                        <button
+                            className={`${styles.iconBtn} ${styles.iconBtnPrimary}`}
+                            aria-label="Profile"
+                            onClick={() => setOpenDrawer(true)}
+                        >
+                            <User size={17} />
+                        </button>
+
+                    </div>
                 </div>
 
-                {/* RIGHT */}
-                <div className="flex items-center gap-4">
-
-                    <button className="bg-[#0b2a8f] p-3 rounded-full text-white shadow-lg hover:scale-105 transition cursor-pointer">
-                        <Plus size={18} />
-                    </button>
-
-                    <button className="bg-[#0b2a8f] p-3 rounded-full text-white shadow-lg hover:scale-105 transition cursor-pointer">
-                        <Bell size={18} />
-                    </button>
-
-                    <button
-                        className="bg-[#0b2a8f] p-3 rounded-full text-white shadow-lg hover:scale-105 transition cursor-pointer"
-                        onClick={() => setOpenDrawer(true)}
-                    >
-                        <User size={18} />
-                    </button>
-
+                {/* MOBILE SEARCH BAR — shown below header on small screens */}
+                <div className={styles.mobileSearch}>
+                    <div className={styles.mobileSearchInner}>
+                        <input
+                            type="text"
+                            placeholder="Search products or services..."
+                        />
+                        <button aria-label="Search">
+                            <svg viewBox="64 64 896 896" fill="white" width="15" height="15">
+                                <path d="M909.6 826.5L703.5 620.4a326.7 326.7 0 10-83.1 83.1l206.1 206.1a60 60 0 0084.9-84.9zM416 704a288 288 0 11288-288 288.3 288.3 0 01-288 288z" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-            </div>
 
-            {/* Drawer */}
+            </header>
+
+            {/* Profile Drawer */}
             <ProfileDrawer
                 openDrawer={openDrawer}
                 setOpenDrawer={setOpenDrawer}
             />
-        </header>
+        </>
     );
 }

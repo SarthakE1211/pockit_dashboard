@@ -15,7 +15,7 @@ const DashBoard = () => {
         <div>
             <Header />
             {UserType === "Admin" ? (
-                <CustomerDashboard />
+                <BackendDashboard />
             ) : UserType === "technician" ? (
                 <TechnicianDashboard />
             ) : UserType === "customer" ? (

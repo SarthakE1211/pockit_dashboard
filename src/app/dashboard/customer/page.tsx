@@ -1,158 +1,193 @@
 "use client";
 
 import {
-    Gift,
-    LifeBuoy,
-    Wrench,
-    Clock,
-    ArrowRight,
-    Bell,
-    User,
+    CheckCircle2, Circle, Loader2, ArrowRight,
+    ChevronRight, BookOpen, MessageCircle, Video,
+    FileText, Activity, Phone, Headphones,
+    Wrench, LifeBuoy, Gift, User,
 } from "lucide-react";
+import styles from "./styles/Customerdashboard.module.css";
 
-const CustomerDashboard = () => {
+/* ─────────────── DATA ─────────────── */
+const TIMELINE = [
+    { label: "Service Booked", time: "Mar 10, 9:00 AM", status: "done" },
+    { label: "Technician Assigned", time: "Mar 10, 11:30 AM", status: "done" },
+    { label: "In Progress", time: "Mar 12, 2:00 PM", status: "active" },
+    { label: "Awaiting Review", time: "—", status: "pending" },
+    { label: "Resolved", time: "—", status: "pending" },
+];
+
+const OFFERS = [
+    { title: "20% Off Next Booking", desc: "Valid till Mar 31", color: "#d97706", light: "#fffbeb", badge: "Limited" },
+    { title: "Free Annual Maintenance", desc: "On plans above ₹2000", color: "#16a34a", light: "#f0fdf4", badge: "New" },
+    { title: "Refer & Earn ₹500", desc: "Per successful referral", color: "#2563eb", light: "#eff6ff", badge: "Active" },
+];
+
+const SELF_HELP = [
+    { title: "FAQs", desc: "Common questions", Icon: BookOpen, color: "#2563eb", bg: "#eff6ff" },
+    { title: "Raise Ticket", desc: "Report an issue", Icon: MessageCircle, color: "#dc2626", bg: "#fff5f5" },
+    { title: "Video Guides", desc: "How-to videos", Icon: Video, color: "#7c3aed", bg: "#f5f3ff" },
+    { title: "User Manual", desc: "Download guides", Icon: FileText, color: "#0891b2", bg: "#ecfeff" },
+    { title: "Call Support", desc: "Talk to an agent", Icon: Phone, color: "#16a34a", bg: "#f0fdf4" },
+    { title: "Live Chat", desc: "Chat in real-time", Icon: Headphones, color: "#d97706", bg: "#fffbeb" },
+];
+
+const SERVICES = [
+    { title: "Book Service", desc: "Schedule a technician visit", Icon: Wrench, color: "#2563eb", bg: "#eff6ff" },
+    { title: "Track Request", desc: "Check live status updates", Icon: Activity, color: "#16a34a", bg: "#f0fdf4" },
+    { title: "Raise Complaint", desc: "Report an issue quickly", Icon: LifeBuoy, color: "#dc2626", bg: "#fff5f5" },
+];
+
+const STATS = [
+    { label: "Active", value: "3", color: "#2563eb", bg: "#eff6ff" },
+    { label: "Resolved", value: "12", color: "#16a34a", bg: "#f0fdf4" },
+    { label: "Pending", value: "2", color: "#d97706", bg: "#fffbeb" },
+];
+
+/* ─────────────── COMPONENT ─────────────── */
+export default function CustomerDashboard() {
     return (
-        <div className="min-h-screen bg-gray-100">
+        <div className={styles.root}>
+            <div className={styles.page}>
 
-            {/* Top Navbar */}
-            {/* <div className="bg-white border-b px-6 py-4 flex items-center justify-between">
-                <h1 className="text-xl font-bold text-gray-800">Pockit</h1>
-
-                <div className="flex items-center gap-4">
-                    <Bell className="text-gray-500 cursor-pointer" />
-                    <div className="flex items-center gap-2 cursor-pointer">
-                        <User className="text-gray-600" />
-                        <span className="text-sm text-gray-700">Customer</span>
-                    </div>
-                </div>
-            </div> */}
-
-            {/* Main Content */}
-            <div className="p-6">
-
-                {/* Hero Section */}
-                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-500 to-indigo-600 p-6 mb-8 text-white shadow">
-                    <div className="relative z-10">
-                        <h1 className="text-3xl font-bold mb-2">
-                            Welcome back 👋
-                        </h1>
-                        <p className="opacity-90 mb-4">
-                            Manage your services & track activity easily
-                        </p>
-                        <button className="bg-white text-blue-600 px-4 py-2 rounded-lg text-sm font-medium hover:scale-105 transition">
-                            Book a Service
-                        </button>
-                    </div>
-
-                    <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/30 blur-3xl rounded-full"></div>
+                {/* ── Header ── */}
+                <div className={styles.header}>
+                    <p className={styles.headerLabel}>Welcome back, Alex</p>
+                    <h1 className={styles.headerTitle}>Customer Dashboard</h1>
                 </div>
 
-                {/* Top Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                {/* ── ROW 1: Active Request + Offers ── */}
+                <div className={`${styles.row} ${styles.row2}`}>
 
-                    {/* Activity */}
-                    <div className="bg-white border rounded-2xl p-5 shadow-sm hover:shadow-md hover:-translate-y-1 transition">
-                        <Clock className="text-blue-500 mb-3" />
-                        <h2 className="font-semibold text-lg text-gray-800">
-                            Last Activity
-                        </h2>
-                        <p className="text-sm text-gray-500 mt-1">
-                            Service completed on March 12
-                        </p>
+                    {/* A. Active Request Flow */}
+                    <div className={`${styles.card} ${styles.cardBlue}`}>
+                        <div className={styles.sectionHead} data-accent="blue">
+                            <span className={styles.cardTitle}>Active Request</span>
+                            <div className={styles.chipRow}>
+                                <span className={`${styles.chip} ${styles.chipBlue}`}>#PK-4821</span>
+                                <span className={`${styles.chip} ${styles.chipPulse}`}>
+                                    <span className={styles.pulseDot} />
+                                    IN PROGRESS
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* Flow track */}
+                        <div className={styles.flowTrack}>
+                            {TIMELINE.map((step, i) => (
+                                <div
+                                    key={i}
+                                    className={`${styles.flowStep} ${step.status === "done" ? styles.done :
+                                        step.status === "active" ? styles.active : styles.pending
+                                        }`}
+                                >
+                                    <div className={styles.flowNode}>
+                                        {step.status === "done" && <CheckCircle2 size={15} />}
+                                        {step.status === "active" && <Loader2 size={15} className={styles.spin} />}
+                                        {step.status === "pending" && <Circle size={14} />}
+                                    </div>
+                                    <p className={styles.flowLabel}>{step.label}</p>
+                                    <p className={styles.flowTime}>{step.time}</p>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Technician info bar */}
+                        <div className={styles.techBar}>
+                            <User size={13} color="#2563eb" />
+                            <span>Technician: <strong>Raj Kumar</strong> &nbsp;·&nbsp; ETA: Today, 5:00 PM</span>
+                        </div>
                     </div>
 
-                    {/* Offers */}
-                    <div className="bg-gradient-to-br from-pink-500 to-purple-500 text-white p-5 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition">
-                        <Gift className="mb-3" />
-                        <h2 className="font-semibold text-lg">
-                            Special Offer 🎉
-                        </h2>
-                        <p className="text-sm opacity-90">
-                            Get 20% off on your next booking
-                        </p>
+                    {/* B. Offers */}
+                    <div className={`${styles.card} ${styles.cardAmber}`}>
+                        <div className={styles.sectionHead} data-accent="amber">
+                            <span className={styles.cardTitle}>Offers for You</span>
+                            <button className={`${styles.linkBtn} ${styles.linkAmber}`}>
+                                View all <ArrowRight size={12} />
+                            </button>
+                        </div>
 
-                        <span className="inline-block mt-3 text-xs bg-white/20 px-2 py-1 rounded">
-                            Limited Time
-                        </span>
-                    </div>
-
-                    {/* Help */}
-                    <div className="bg-white border rounded-2xl p-5 shadow-sm hover:shadow-md hover:-translate-y-1 transition">
-                        <LifeBuoy className="text-purple-500 mb-3" />
-                        <h2 className="font-semibold text-lg text-gray-800">
-                            Need Help?
-                        </h2>
-                        <p className="text-sm text-gray-500 mb-3">
-                            Solve issues instantly
-                        </p>
-                        <button className="flex items-center gap-1 text-sm text-purple-600 font-medium">
-                            Explore <ArrowRight size={14} />
-                        </button>
-                    </div>
-                </div>
-
-                {/* Services */}
-                <div className="mb-8">
-                    <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                        Quick Services
-                    </h2>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                        {[
-                            {
-                                title: "Book Service",
-                                desc: "Schedule technician visit",
-                                color: "from-blue-500 to-indigo-500",
-                            },
-                            {
-                                title: "Track Request",
-                                desc: "Check live status",
-                                color: "from-green-500 to-emerald-500",
-                            },
-                            {
-                                title: "Raise Complaint",
-                                desc: "Report an issue",
-                                color: "from-red-500 to-pink-500",
-                            },
-                        ].map((item, i) => (
-                            <div
-                                key={i}
-                                className={`p-5 rounded-2xl text-white bg-gradient-to-br ${item.color} shadow hover:shadow-lg hover:scale-105 transition cursor-pointer`}
-                            >
-                                <h3 className="font-semibold text-lg">
-                                    {item.title}
-                                </h3>
-                                <p className="text-sm opacity-90">
-                                    {item.desc}
-                                </p>
+                        {OFFERS.map((o, i) => (
+                            <div key={i} className={styles.offerRow}>
+                                <div className={styles.offerIcon} style={{ background: o.light }}>
+                                    <Gift size={16} color={o.color} />
+                                </div>
+                                <div className={styles.offerInfo}>
+                                    <div className={styles.offerTitleRow}>
+                                        <span className={styles.offerTitle}>{o.title}</span>
+                                        <span className={styles.badge} style={{ color: o.color, background: o.light }}>
+                                            {o.badge}
+                                        </span>
+                                    </div>
+                                    <p className={styles.offerDesc}>{o.desc}</p>
+                                </div>
+                                <button className={styles.claimBtn} style={{ background: o.color }}>
+                                    Claim
+                                </button>
                             </div>
                         ))}
                     </div>
                 </div>
 
-                {/* Timeline */}
-                <div className="bg-white border rounded-2xl p-6 shadow-sm">
-                    <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                        Recent Activity
-                    </h2>
+                {/* ── ROW 2: Self Help + Services ── */}
+                <div className={`${styles.row} ${styles.row3}`}>
 
-                    <div className="space-y-4">
-                        {[
-                            "Service booked",
-                            "Technician assigned",
-                            "Issue resolved",
-                        ].map((item, i) => (
-                            <div key={i} className="flex items-center gap-4">
-                                <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                                <p className="text-sm text-gray-600">{item}</p>
+                    {/* C. Self Help */}
+                    <div className={`${styles.card} ${styles.cardPurple}`}>
+                        <div className={styles.sectionHead} data-accent="purple">
+                            <span className={styles.cardTitle}>Self Help</span>
+                        </div>
+                        <div className={styles.helpGrid}>
+                            {SELF_HELP.map(({ title, desc, Icon, color, bg }, i) => (
+                                <div key={i} className={styles.helpTile}>
+                                    <div className={styles.helpIconBox} style={{ background: bg }}>
+                                        <Icon size={15} color={color} />
+                                    </div>
+                                    <p className={styles.helpTitle}>{title}</p>
+                                    <p className={styles.helpDesc}>{desc}</p>
+                                    <div className={styles.helpOpen} style={{ color }}>
+                                        Open <ChevronRight size={11} />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* D. Services + Stats */}
+                    <div className={`${styles.card} ${styles.cardGreen}`}>
+                        <div className={styles.sectionHead} data-accent="green">
+                            <span className={styles.cardTitle}>Services</span>
+                            <button className={`${styles.linkBtn} ${styles.linkGreen}`}>
+                                View all <ArrowRight size={12} />
+                            </button>
+                        </div>
+
+                        {SERVICES.map(({ title, desc, Icon, color, bg }, i) => (
+                            <div key={i} className={styles.svcRow}>
+                                <div className={styles.svcIconBox} style={{ background: bg }}>
+                                    <Icon size={16} color={color} />
+                                </div>
+                                <div className={styles.svcMeta}>
+                                    <p className={styles.svcTitle}>{title}</p>
+                                    <p className={styles.svcDesc}>{desc}</p>
+                                </div>
+                                <ChevronRight size={14} color="#d1d5db" />
                             </div>
                         ))}
+
+                        <div className={styles.statsRow}>
+                            {STATS.map((s, i) => (
+                                <div key={i} className={styles.statBox} style={{ background: s.bg }}>
+                                    <p className={styles.statValue} style={{ color: s.color }}>{s.value}</p>
+                                    <p className={styles.statLabel}>{s.label}</p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
 
             </div>
         </div>
     );
-};
-
-export default CustomerDashboard;
+}

@@ -1,0 +1,545 @@
+/* CustomerDashboard.module.css */
+
+/* ─── TOKENS ─── */
+.root {
+    --bg: #f0f2f7;
+    --surface: #ffffff;
+    --border: #e4e8f0;
+    --text: #1a1f2e;
+    --muted: #6b7280;
+    --blue: #2563eb;
+    --blue-bg: #eff6ff;
+    --green: #16a34a;
+    --green-bg: #f0fdf4;
+    --red: #dc2626;
+    --red-bg: #fff5f5;
+    --amber: #d97706;
+    --amber-bg: #fffbeb;
+    --purple: #7c3aed;
+    --purple-bg: #f5f3ff;
+    --radius: 14px;
+    --shadow: 0 2px 12px rgba(0, 0, 0, .06);
+
+    background: var(--bg);
+    min-height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* ─── PAGE ─── */
+.page {
+    width: 100%;
+    padding: 28px 32px 48px;
+}
+
+/* ─── HEADER ─── */
+.header {
+    margin-bottom: 28px;
+}
+
+.headerLabel {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.headerTitle {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(22px, 4vw, 30px);
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 2px;
+}
+
+/* ─── GRID ─── */
+.row {
+    display: grid;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+.row2 {
+    grid-template-columns: 1fr 1fr;
+}
+
+.row3 {
+    grid-template-columns: 1.25fr 1fr;
+}
+
+/* ─── CARD ─── */
+.card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1.5px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 0;
+    /* padding lives inside sectionHead + body */
+    overflow: hidden;
+}
+
+/* accent left borders */
+.cardBlue {
+    border-left: 4px solid var(--blue);
+}
+
+.cardAmber {
+    border-left: 4px solid var(--amber);
+}
+
+.cardPurple {
+    border-left: 4px solid var(--purple);
+}
+
+.cardGreen {
+    border-left: 4px solid var(--green);
+}
+
+/* ─── SECTION HEAD ─── */
+.sectionHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 20px;
+    margin-bottom: 0;
+}
+
+.cardBlue .sectionHead {
+    background: var(--blue-bg);
+}
+
+.cardAmber .sectionHead {
+    background: var(--amber-bg);
+}
+
+.cardPurple .sectionHead {
+    background: var(--purple-bg);
+}
+
+.cardGreen .sectionHead {
+    background: var(--green-bg);
+}
+
+.cardTitle {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+/* ─── LINK BTN ─── */
+.linkBtn {
+    font-size: 11.5px;
+    font-weight: 600;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    padding: 0;
+}
+
+.linkBtn:hover {
+    text-decoration: underline;
+}
+
+.linkAmber {
+    color: var(--amber);
+}
+
+.linkGreen {
+    color: var(--green);
+}
+
+/* ─── CHIP ROW ─── */
+.chipRow {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+}
+
+.chip {
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: .04em;
+}
+
+.chipBlue {
+    background: #dbeafe;
+    color: var(--blue);
+}
+
+.chipPulse {
+    background: #dbeafe;
+    color: var(--blue);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.pulseDot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--blue);
+    animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: .4;
+        transform: scale(.65);
+    }
+}
+
+/* ─── FLOW TRACK ─── */
+.flowTrack {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px 20px 4px;
+    overflow-x: auto;
+    gap: 0;
+}
+
+.flowStep {
+    flex: 1;
+    min-width: 72px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* connector line */
+.flowStep:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: calc(50% + 18px);
+    right: calc(-50% + 18px);
+    height: 2px;
+    background: var(--border);
+    z-index: 0;
+}
+
+.flowStep.done:not(:last-child)::after {
+    background: var(--green);
+}
+
+.flowStep.active:not(:last-child)::after {
+    background: linear-gradient(90deg, var(--blue) 40%, var(--border));
+}
+
+.flowNode {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--border);
+    background: var(--surface);
+    position: relative;
+    z-index: 1;
+}
+
+.done .flowNode {
+    background: var(--green-bg);
+    border-color: var(--green);
+    color: var(--green);
+}
+
+.active .flowNode {
+    background: var(--blue-bg);
+    border-color: var(--blue);
+    color: var(--blue);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, .12);
+}
+
+.pending .flowNode {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    color: #9ca3af;
+}
+
+.flowLabel {
+    font-size: 10px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 7px;
+    max-width: 72px;
+    line-height: 1.3;
+    color: var(--text);
+}
+
+.pending .flowLabel {
+    color: var(--muted);
+}
+
+.flowTime {
+    font-size: 9px;
+    color: var(--muted);
+    margin-top: 3px;
+    text-align: center;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spin {
+    animation: spin 1.2s linear infinite;
+}
+
+/* ─── TECH BAR ─── */
+.techBar {
+    margin: 14px 20px 20px;
+    padding: 10px 14px;
+    background: #f0f6ff;
+    border: 1px solid #dbeafe;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--blue);
+    font-weight: 500;
+}
+
+/* ─── OFFERS ─── */
+.offerRow {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 10px 12px;
+    margin: 0 20px 10px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    background: #fafafa;
+    transition: box-shadow .15s;
+    cursor: pointer;
+}
+
+.offerRow:last-child {
+    margin-bottom: 20px;
+}
+
+.offerRow:hover {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .08);
+}
+
+.offerIcon {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.offerInfo {
+    flex: 1;
+    min-width: 0;
+}
+
+.offerTitleRow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.offerTitle {
+    font-size: 12.5px;
+    font-weight: 700;
+}
+
+.offerDesc {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+.badge {
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 20px;
+    letter-spacing: .04em;
+}
+
+.claimBtn {
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    border: none;
+    padding: 6px 13px;
+    border-radius: 7px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity .15s, transform .1s;
+}
+
+.claimBtn:hover {
+    opacity: .86;
+    transform: scale(1.04);
+}
+
+/* ─── SELF HELP ─── */
+.helpGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 16px 20px 20px;
+}
+
+.helpTile {
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 10px 10px;
+    cursor: pointer;
+    background: #fafafa;
+    transition: box-shadow .15s, transform .15s;
+}
+
+.helpTile:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .09);
+    transform: translateY(-2px);
+}
+
+.helpIconBox {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 7px;
+}
+
+.helpTitle {
+    font-size: 11.5px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.helpDesc {
+    font-size: 10px;
+    color: var(--muted);
+    margin-bottom: 6px;
+}
+
+.helpOpen {
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+/* ─── SERVICES ─── */
+.svcRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 20px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background .12s;
+}
+
+.svcRow:last-of-type {
+    border-bottom: none;
+}
+
+.svcRow:hover {
+    background: #f7f9ff;
+}
+
+.svcIconBox {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.svcMeta {
+    flex: 1;
+}
+
+.svcTitle {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.svcDesc {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 1px;
+}
+
+/* ─── STATS ─── */
+.statsRow {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 14px 20px 20px;
+}
+
+.statBox {
+    border-radius: 10px;
+    padding: 10px 8px;
+    text-align: center;
+}
+
+.statValue {
+    font-size: 22px;
+    font-weight: 700;
+    font-family: 'Sora', sans-serif;
+}
+
+.statLabel {
+    font-size: 10px;
+    color: var(--muted);
+    font-weight: 500;
+    margin-top: 2px;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 860px) {
+
+    .row2,
+    .row3 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .page {
+        padding: 16px 12px 36px;
+    }
+
+    .helpGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .flowLabel {
+        font-size: 9px;
+        max-width: 60px;
+    }
+}

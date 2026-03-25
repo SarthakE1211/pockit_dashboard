@@ -34,7 +34,7 @@ export default function ProfileDrawer({ openDrawer, setOpenDrawer }: ProfileDraw
                     </div>
                     <div>
                         <button
-                            className="bg-red-500 p-3 rounded-full text-white shadow-lg hover:scale-105 transition cursor-pointer"
+                            className="bg-red-500 p-3 rounded-lg p-10 text-white shadow-lg hover:scale-105 transition cursor-pointer"
                             onClick={logout}
                         >
                             Logout

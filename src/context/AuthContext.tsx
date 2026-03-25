@@ -19,6 +19,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const userId: string | null = useAppSelector((state) => state.user?.UserID ?? null);
 
     const logout = async () => {
+        console.log("logout called");
+
         // remove token cookie
         await fetch("/api/auth/logout", {
             method: "POST",

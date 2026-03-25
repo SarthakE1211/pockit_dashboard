@@ -42,7 +42,7 @@ export function middleware(request: NextRequest) {
     "default-src 'self'; " +
     "script-src 'self' 'unsafe-inline' 'unsafe-eval'; " +
     "style-src 'self' 'unsafe-inline'; " +
-    "connect-src 'self' https://pockit.pockitengineers.com https://api-bdc.io https://nominatim.openstreetmap.org https://*.tile.openstreetmap.org; " +
+    "connect-src 'self' http://localhost:* https://pockit.pockitengineers.com https://api-bdc.io https://nominatim.openstreetmap.org https://*.tile.openstreetmap.org; " +
     "img-src 'self' data: https://*.tile.openstreetmap.org https://unpkg.com;"
   );
   response.headers.set(
